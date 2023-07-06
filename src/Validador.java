@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class ValidaValor {
+public class Validador {
 
     private double valor;
 
