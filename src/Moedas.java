@@ -21,19 +21,17 @@ public class Moedas {
 
             int responseCode = conn.getResponseCode();
             if (responseCode == 200) {
-                // Lê a resposta da API
+
                 Scanner scanner = new Scanner(url.openStream());
                 String resposta = scanner.useDelimiter("\\A").next();
                 scanner.close();
 
-                // Analisa a resposta para obter as taxas atualizadas
                 double taxaEuro = Double.parseDouble(resposta.split("\"EUR\":")[1].split(",")[0]);
                 double taxaDolar = Double.parseDouble(resposta.split("\"USD\":")[1].split(",")[0]);
                 double taxaPesoChileno = Double.parseDouble(resposta.split("\"CLP\":")[1].split(",")[0]);
                 double taxaPesoArgentino = Double.parseDouble(resposta.split("\"ARS\":")[1].split(",")[0]);
                 double taxaLibra = Double.parseDouble(resposta.split("\"GBP\":")[1].split(",")[0]);
 
-                // Atualiza os valores das moedas
                 euro = taxaEuro;
                 dolar = taxaDolar;
                 pesoChileno = taxaPesoChileno;
@@ -49,8 +47,17 @@ public class Moedas {
         }
     }
 
-    // Métodos getters e setters
+    public static void main(String[] args) {
+        Moedas moedas = new Moedas();
+        moedas.atualizarValores();
 
+        System.out.println("Taxa do Euro: " + moedas.getEuro());
+        System.out.println("Taxa do Dólar: " + moedas.getDolar());
+        System.out.println("Taxa do Peso Chileno: " + moedas.getPesoChileno());
+        System.out.println("Taxa do Peso Argentino: " + moedas.getPesoArgentino());
+        System.out.println("Taxa da Libra: " + moedas.getLibra());
+    }
+    
     public double getEuro() {
         return euro;
     }
@@ -98,17 +105,4 @@ public class Moedas {
     public void setLibra(double libra) {
         this.libra = libra;
     }
-
-    public static void main(String[] args) {
-        Moedas moedas = new Moedas();
-        moedas.atualizarValores();
-
-        // Exemplo de uso das taxas atualizadas
-        System.out.println("Taxa do Euro: " + moedas.getEuro());
-        System.out.println("Taxa do Dólar: " + moedas.getDolar());
-        System.out.println("Taxa do Peso Chileno: " + moedas.getPesoChileno());
-        System.out.println("Taxa do Peso Argentino: " + moedas.getPesoArgentino());
-        System.out.println("Taxa da Libra: " + moedas.getLibra());
-    }
 }
-
